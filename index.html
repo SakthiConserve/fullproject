@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BIM MEP Workshop – Qural Talent Nexus</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&family=Outfit:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+
+<!-- FULLSCREEN WEBGL BACKGROUND -->
+<canvas id="bg-canvas"></canvas>
+<div class="grid-overlay"></div>
+<div class="noise"></div>
+
+<!-- CUSTOM CURSOR -->
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+<div id="cursor-glow"></div>
+
+<!-- TOPBAR -->
+<div id="topbar">
+  <a href="#" class="logo-text">Qural <span>Talent</span> Nexus</a>
+  <div class="reach-wrap">
+    <span class="reach-label">Reach Us</span>
+    <div class="socials">
+      <a class="soc" href="https://www.facebook.com/profile.php?id=61578494472710&sk=about" target="_blank" title="Facebook">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+      </a>
+      <a class="soc" href="https://www.instagram.com/quraltalent/?hl=en" target="_blank" title="Instagram">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      </a>
+      <a class="soc" href="https://www.linkedin.com/company/qural-talent/" target="_blank" title="LinkedIn">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+      </a>
+      <a class="soc" href="https://youtube.com/@quraltalent-k5b" target="_blank" title="YouTube">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42A2.78 2.78 0 0020.59 4.5C18.88 4 12 4 12 4s-6.88 0-8.59.5a2.78 2.78 0 00-1.95 1.92A29 29 0 001 12a29 29 0 00.46 5.58 2.78 2.78 0 001.95 1.92C5.12 20 12 20 12 20s6.88 0 8.59-.5a2.78 2.78 0 001.95-1.92A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#000"/></svg>
+      </a>
+      <a class="soc" href="https://chat.whatsapp.com/Cn8O96TiI6zL8raH7lX0SO" target="_blank" title="WhatsApp">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654A11.882 11.882 0 0012.05 24h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      </a>
+      <a class="phone-link" href="tel:8754111740">📞 8754111740</a>
+    </div>
+  </div>
+</div>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#instructor">Instructor</a>
+      <a href="#schedule">Schedule</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <a href="https://forms.gle/xzzp6jPiZEEbTqSW6" target="_blank" class="nav-reg">
+      Register Now
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section class="hero" id="about" style="padding:0">
+  <div class="hero-left">
+    <div class="hero-eyebrow"><span></span>BIM MEP Workshop · June 14</div>
+    <h1 class="hero-h1">You've Studied<br>Engineering.<br><em>But Can You</em><br>Work on a<br>Real Project?</h1>
+    <p class="hero-sub">Most fresh graduates can't answer that honestly.<br><strong style="color:#fff;font-weight:500">This workshop changes that — in one day.</strong></p>
+    <div class="hero-meta">
+      <div class="meta-chip">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        June 14, 2026
+      </div>
+      <div class="meta-chip">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        9AM – 4PM
+      </div>
+      <div class="meta-chip">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Offline Only
+      </div>
+      <div class="meta-chip">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        30 Seats Only
+      </div>
+    </div>
+    <div class="hero-btns">
+      <a href="https://forms.gle/xzzp6jPiZEEbTqSW6" target="_blank" class="btn-primary">
+        Reserve My Seat
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#schedule" class="btn-outline">
+        See Schedule
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-card-wrap" id="tiltCard">
+      <div class="float-el fe1"><span class="fe-dot"></span>Revit · BIM 360</div>
+      <div class="float-el fe2"><span class="fe-dot"></span>HVAC · MEP Coordination</div>
+      <div class="float-el fe3"><span class="fe-dot"></span>Live Project</div>
+      <div class="hero-card">
+        <div class="hero-card-inner">
+          <div class="hc-tag">Workshop Instructor</div>
+          <div class="hc-name">Mr. Dhamodaran</div>
+          <div class="hc-role">BIM &amp; MEP Industry Professional</div>
+          <div class="hc-stats">
+            <div class="hc-stat">
+              <div class="hc-stat-num">10+</div>
+              <div class="hc-stat-label">Years in BIM &amp; MEP</div>
+            </div>
+            <div class="hc-stat">
+              <div class="hc-stat-num">Real</div>
+              <div class="hc-stat-label">Project Experience</div>
+            </div>
+            <div class="hc-stat">
+              <div class="hc-stat-num">1</div>
+              <div class="hc-stat-label">Day · Full Workflow</div>
+            </div>
+            <div class="hc-stat">
+              <div class="hc-stat-num">30</div>
+              <div class="hc-stat-label">Limited Seats</div>
+            </div>
+          </div>
+          <div class="hc-skills">
+            <span class="hc-skill">Revit Architecture</span>
+            <span class="hc-skill">HVAC Design</span>
+            <span class="hc-skill">Electrical MEP</span>
+            <span class="hc-skill">BIM Coordination</span>
+            <span class="hc-skill">Clash Detection</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="red-line"></div>
+
+<!-- WORKSHOP OVERVIEW -->
+<section id="workshop">
+  <div class="sec-label">About</div>
+  <h2 class="sec-h2 reveal">What Is This Workshop?</h2>
+  <p class="sec-lead reveal">A full-day, hands-on BIM MEP workshop where you work inside real software, on a real building model, following the exact workflow used on actual construction projects.</p>
+  <div class="overview-grid">
+    <div class="ov-card reveal">
+      <div class="ov-icon">📅</div>
+      <div class="ov-title">Date</div>
+      <div class="ov-val">June 14, 2026</div>
+    </div>
+    <div class="ov-card reveal" style="transition-delay:.1s">
+      <div class="ov-icon">🕘</div>
+      <div class="ov-title">Time</div>
+      <div class="ov-val">9:00 AM – 4:00 PM</div>
+    </div>
+    <div class="ov-card reveal" style="transition-delay:.2s">
+      <div class="ov-icon">📍</div>
+      <div class="ov-title">Mode</div>
+      <div class="ov-val">Offline Only</div>
+    </div>
+  </div>
+  <div class="overview-quote reveal">
+    <strong>Not theory. Not slides. Not a webinar.</strong><br>You sit, you do, you understand.
+  </div>
+</section>
+
+<div class="divline"></div>
+
+<!-- INSTRUCTOR -->
+<section id="instructor">
+  <div class="sec-label">Your Trainer</div>
+  <h2 class="sec-h2">Who Is Taking<br>This Workshop?</h2>
+  <div class="instructor-wrap">
+    <div class="inst-visual reveal-left">
+      <div class="inst-ring"></div>
+      <div class="inst-ring"></div>
+      <div class="inst-ring"></div>
+      <div style="display:flex;flex-direction:column;align-items:center;z-index:5;width:100%;max-width:340px">
+        <div class="inst-avatar" style="overflow:hidden;padding:0;background:transparent;border:2px solid rgba(235,54,68,.4);box-shadow:0 0 50px rgba(235,54,68,.18),0 0 100px rgba(235,54,68,.08)"><img src="C:\Users\Admin\Desktop\qural site\qural-bim-project\assets\images\dhamodhiran.png" alt="Mr. Dhamodaran" style="width:100%;height:100%;object-fit:cover;object-position:center top;border-radius:50%;display:block"></div>
+        <div class="inst-badges">
+          <div class="inst-badge"><div class="inst-badge-dot"></div>10+ Years BIM &amp; MEP Experience</div>
+          <div class="inst-badge"><div class="inst-badge-dot"></div>Real Coordination Projects</div>
+          <div class="inst-badge"><div class="inst-badge-dot"></div>Industry Workflow Expert</div>
+        </div>
+      </div>
+    </div>
+    <div class="inst-info reveal-right">
+      <div class="sec-label" style="margin-bottom:8px">Mr. Dhamodaran</div>
+      <h3>BIM &amp; MEP<br>Industry Professional</h3>
+      <div class="inst-role">10+ Years of Experience</div>
+      <p>He has worked on real coordination projects — not taught from textbooks. For one day, he sits with you and walks you through exactly how the industry works: the decisions made, the clashes avoided, and the workflows that actually run on site.</p>
+      <a href="https://forms.gle/xzzp6jPiZEEbTqSW6" target="_blank" class="btn-outline">
+        Learn From Him — Register
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="divline"></div>
+
+<!-- SCHEDULE -->
+<section id="schedule">
+  <div class="sec-label">Full Day Schedule</div>
+  <h2 class="sec-h2">What You Will<br><span style="color:var(--red)">Actually Do</span></h2>
+  <p class="sec-lead">Not slides. Not lectures. You sit, you build, you understand — 7 hours of live project work.</p>
+  <div class="timeline reveal">
+    <div class="tl-item">
+      <div class="tl-time">Morning · 9:00 – 11:30 AM</div>
+      <h3>Build the Architecture</h3>
+      <div class="tl-card">
+        <p>Start from a real CAD drawing. Link it into Revit, trace walls over it, place doors, windows, floors and ceilings. Understand how a building model actually comes together.</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">Midday · 11:30 AM – 1:30 PM</div>
+      <h3>Route the HVAC System</h3>
+      <div class="tl-card">
+        <p>Place air terminals at the correct heights. Draw ducts connecting them. Understand why positioning matters and how mechanical engineers think inside a building.</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">Afternoon · 2:00 – 3:30 PM</div>
+      <h3>Add Electrical Systems</h3>
+      <div class="tl-card">
+        <p>Place lighting fixtures, switches, and route conduits through the same building. Understand how electrical planning fits around what's already there.</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">End of Day · 3:30 – 4:00 PM</div>
+      <h3>See Everything Together</h3>
+      <div class="tl-card" style="border-color:var(--border-red);background:rgba(235,54,68,.04)">
+        <p>Open the 3D coordination view. Watch architecture, HVAC and electrical systems appear in the same model. Understand what coordination actually means on a real project.</p>
+      </div>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:50px">
+    <p style="color:var(--muted2);font-style:italic;font-size:1.02rem;margin-bottom:22px">"This is the moment most students never get to see in college."</p>
+    <a href="https://forms.gle/xzzp6jPiZEEbTqSW6" target="_blank" class="btn-primary">Register Now</a>
+  </div>
+</section>
+
+<div class="divline"></div>
+
+<!-- WHY THIS MATTERS -->
+<section id="why">
+  <div class="sec-label">Career Impact</div>
+  <h2 class="sec-h2 reveal">Why This Matters<br>for Your Career</h2>
+  <p class="sec-lead reveal">Companies working on real construction projects don't just need people who passed exams.</p>
+  <div class="why-grid">
+    <div class="why-card reveal">
+      <div class="why-icon">🏗️</div>
+      <h4>Department Coordination</h4>
+      <p>Understand how departments coordinate before anything gets built — a skill no exam tests.</p>
+    </div>
+    <div class="why-card reveal" style="transition-delay:.1s">
+      <div class="why-icon">⚡</div>
+      <h4>Clash Detection</h4>
+      <p>Understand why clashes happen and how they're avoided before construction starts.</p>
+    </div>
+    <div class="why-card reveal" style="transition-delay:.2s">
+      <div class="why-icon">🔗</div>
+      <h4>Design to Execution</h4>
+      <p>See exactly how BIM connects design to on-site execution — the full pipeline.</p>
+    </div>
+  </div>
+  <p style="margin-top:38px;color:var(--muted2);font-size:1.02rem;font-style:italic;text-align:center">"This workshop gives you that understanding — before your first interview."</p>
+</section>
+
+<div class="divline"></div>
+
+<!-- FOR WHOM -->
+<section id="forwhom">
+  <div class="sec-label">Who Should Attend</div>
+  <h2 class="sec-h2 reveal">For Whom Is This<br>Micro Internship?</h2>
+  <div class="for-grid">
+    <div class="for-item reveal">
+      <div class="for-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <p>You are a <strong>3rd year or final year student</strong> preparing for your career</p>
+    </div>
+    <div class="for-item reveal" style="transition-delay:.07s">
+      <div class="for-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <p>You are a <strong>graduate looking to improve</strong> employability skills</p>
+    </div>
+    <div class="for-item reveal" style="transition-delay:.14s">
+      <div class="for-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <p>You want to <strong>move toward BIM &amp; MEP</strong> opportunities from any stream</p>
+    </div>
+    <div class="for-item reveal" style="transition-delay:.21s">
+      <div class="for-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <p>You <strong>know theory</strong> but have never worked on an industry workflow</p>
+    </div>
+    <div class="for-item reveal" style="transition-delay:.28s">
+      <div class="for-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <p>You want <strong>job-ready exposure</strong> before entering industry</p>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:38px">
+    <p style="color:var(--muted2);margin-bottom:18px;font-size:1.02rem">If your mind says "Yes" — <strong style="color:#fff">This Is Me</strong></p>
+    <a href="https://forms.gle/xzzp6jPiZEEbTqSW6" target="_blank" class="btn-primary">Reserve My Seat</a>
+  </div>
+</section>
+
+<div class="divline"></div>
+
+<!-- WHAT YOU LEAVE WITH -->
+<section id="takeaways">
+  <div class="sec-label">What You Get</div>
+  <h2 class="sec-h2 reveal">What You Leave With</h2>
+  <div class="take-grid">
+    <div class="take-card reveal">
+      <div class="take-icon">🛠️</div>
+      <h4>Real Workflow Experience</h4>
+      <p>A full day of hands-on project work — not demos, not slides. You build a real model, from scratch, start to finish.</p>
+    </div>
+    <div class="take-card reveal" style="transition-delay:.1s">
+      <div class="take-icon">📜</div>
+      <h4>Industry Certificate</h4>
+      <p>An industry-recognised certificate to show employers you've done real, practical BIM MEP work.</p>
+    </div>
+    <div class="take-card reveal" style="transition-delay:.2s">
+      <div class="take-icon">🏗️</div>
+      <h4>MEP Coordination Clarity</h4>
+      <p>A deep understanding of how MEP coordination actually works on real projects — before you've even been hired.</p>
+    </div>
+    <div class="take-card reveal" style="transition-delay:.3s">
+      <div class="take-icon">🎯</div>
+      <h4>Career Direction</h4>
+      <p>Clarity on BIM careers and exactly what companies expect from new hires entering the industry.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divline"></div>
+
+<!-- REVIEWS -->
+<section id="reviews">
+  <div class="sec-label">Testimonials</div>
+  <h2 class="sec-h2 reveal">What Students Say After<br>Learning With Qural</h2>
+  <div class="reviews-grid">
+    <div class="rev-card reveal">
+      <div class="rev-stars">★★★★★</div>
+      <p class="rev-text">"I am a Mechanical student and finally understood how HVAC concepts move into actual projects. The practical workflow exposure changed my perspective."</p>
+      <div class="rev-author">— Mechanical Engineering Student</div>
+      <div class="rev-quote">"</div>
+    </div>
+    <div class="rev-card reveal" style="transition-delay:.1s">
+      <div class="rev-stars">★★★★★</div>
+      <p class="rev-text">"As a Civil student this helped me understand how buildings move from drawings into coordinated models."</p>
+      <div class="rev-author">— Civil Engineering Graduate</div>
+      <div class="rev-quote">"</div>
+    </div>
+    <div class="rev-card reveal" style="transition-delay:.2s">
+      <div class="rev-stars">★★★★★</div>
+      <p class="rev-text">"I never understood where Electrical systems fit inside projects. This session gave me real clarity."</p>
+      <div class="rev-author">— Electrical Engineering Student</div>
+      <div class="rev-quote">"</div>
+    </div>
+    <div class="rev-card reveal" style="transition-delay:.3s">
+      <div class="rev-stars">★★★★★</div>
+      <p class="rev-text">"The best part was understanding how departments work together before execution starts."</p>
+      <div class="rev-author">— Final Year Student</div>
+      <div class="rev-quote">"</div>
+    </div>
+  </div>
+  <div style="text-align:center">
+    <p style="color:var(--muted2);margin-bottom:22px;font-size:1.02rem">I Want This Exposure Too</p>
+    <a href="https://forms.gle/xzzp6jPiZEEbTqSW6" target="_blank" class="btn-primary">Register Now</a>
+  </div>
+</section>
+
+<div class="divline"></div>
+
+<!-- COUNTDOWN / LIMITED SEATS -->
+<section class="limited-section">
+  <div class="seats-badge"><div class="pulse-dot"></div>Limited Availability</div>
+  <h2 class="sec-h2" style="font-size:clamp(2.6rem,6vw,5rem)">Seats Are Limited<br>to <span style="color:var(--red)">30</span></h2>
+  <p style="color:var(--muted2);font-size:1.02rem;margin-bottom:8px">Once they fill, registration closes. No exceptions.</p>
+  <p style="font-family:'DM Mono',monospace;font-size:.76rem;color:var(--muted);letter-spacing:.1em">JUNE 14 · 9:00 AM – 4:00 PM · OFFLINE ONLY</p>
+  <div class="countdown-row">
+    <div class="cd-box"><span class="cd-n" id="cd-d">00</span><span class="cd-l">Days</span></div>
+    <span class="cd-sep">:</span>
+    <div class="cd-box"><span class="cd-n" id="cd-h">00</span><span class="cd-l">Hours</span></div>
+    <span class="cd-sep">:</span>
+    <div class="cd-box"><span class="cd-n" id="cd-m">00</span><span class="cd-l">Mins</span></div>
+    <span class="cd-sep">:</span>
+    <div class="cd-box"><span class="cd-n" id="cd-s">00</span><span class="cd-l">Secs</span></div>
+  </div>
+  <a href="https://forms.gle/xzzp6jPiZEEbTqSW6" target="_blank" class="btn-primary" style="font-size:1.05rem;padding:18px 48px">
+    Reserve My Seat Now
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+  </a>
+</section>
+
+<div class="divline"></div>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="sec-label">FAQ</div>
+  <h2 class="sec-h2 reveal" style="text-align:center">Frequently Asked<br>Questions</h2>
+  <div class="faq-list">
+    <div class="faq-item reveal">
+      <div class="faq-q"><span>Who is this workshop for?</span><div class="faq-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div>
+      <div class="faq-a"><p>This workshop is for 3rd year and final year engineering students, fresh graduates, and anyone looking to move into BIM &amp; MEP roles. No prior Revit experience is required.</p></div>
+    </div>
+    <div class="faq-item reveal" style="transition-delay:.07s">
+      <div class="faq-q"><span>Do I need prior BIM or Revit experience?</span><div class="faq-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div>
+      <div class="faq-a"><p>No prior experience is needed. The workshop starts from the basics and takes you through the full workflow step by step alongside an industry professional.</p></div>
+    </div>
+    <div class="faq-item reveal" style="transition-delay:.14s">
+      <div class="faq-q"><span>What will I take home after the workshop?</span><div class="faq-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div>
+      <div class="faq-a"><p>You'll receive a full day of hands-on workflow experience, an industry-recognised certificate, and a clear understanding of BIM careers and MEP coordination workflows.</p></div>
+    </div>
+    <div class="faq-item reveal" style="transition-delay:.21s">
+      <div class="faq-q"><span>Is this workshop only offline?</span><div class="faq-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div>
+      <div class="faq-a"><p>Yes. This is a fully offline, in-person workshop. The hands-on nature of BIM work requires you to be physically present to get the full experience.</p></div>
+    </div>
+    <div class="faq-item reveal" style="transition-delay:.28s">
+      <div class="faq-q"><span>How many seats are available?</span><div class="faq-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div>
+      <div class="faq-a"><p>Strictly limited to 30 participants. Once those seats are filled, registration closes with no exceptions. Register early to secure your spot.</p></div>
+    </div>
+    <div class="faq-item reveal" style="transition-delay:.35s">
+      <div class="faq-q"><span>How do I register?</span><div class="faq-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div>
+      <div class="faq-a"><p>Click any "Register Now" or "Reserve My Seat" button on this page. You'll be taken to the registration form to complete your booking.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="red-line"></div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="ft-brand">
+      <a href="#" class="logo-text">Qural <span>Talent</span> Nexus</a>
+      <div class="ft-tag">Engineering Tomorrow Together</div>
+      <p>Empowering Mechanical, Electrical, Civil and Architecture learners to move toward industry-ready BIM &amp; MEP careers.</p>
+      <div class="ft-socials">
+        <a class="soc" href="https://www.facebook.com/profile.php?id=61578494472710&sk=about" target="_blank"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+        <a class="soc" href="https://www.instagram.com/quraltalent/?hl=en" target="_blank"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+        <a class="soc" href="https://www.linkedin.com/company/qural-talent/" target="_blank"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a>
+        <a class="soc" href="https://youtube.com/@quraltalent-k5b" target="_blank"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42A2.78 2.78 0 0020.59 4.5C18.88 4 12 4 12 4s-6.88 0-8.59.5a2.78 2.78 0 00-1.95 1.92A29 29 0 001 12a29 29 0 00.46 5.58 2.78 2.78 0 001.95 1.92C5.12 20 12 20 12 20s6.88 0 8.59-.5a2.78 2.78 0 001.95-1.92A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#000"/></svg></a>
+        <a class="soc" href="https://chat.whatsapp.com/Cn8O96TiI6zL8raH7lX0SO" target="_blank"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654A11.882 11.882 0 0012.05 24h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+      </div>
+    </div>
+    <div>
+      <div class="ft-h">Quick Links</div>
+      <div class="ft-links">
+        <a href="#workshop">About Workshop</a>
+        <a href="#instructor">Instructor</a>
+        <a href="#schedule">Schedule</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#faq">FAQ</a>
+      </div>
+    </div>
+    <div>
+      <div class="ft-h">Register</div>
+      <p style="color:var(--muted);font-size:.85rem;margin-bottom:14px;line-height:1.65">Take your first step toward becoming industry-ready.</p>
+      <a href="https://forms.gle/xzzp6jPiZEEbTqSW6" target="_blank" class="btn-primary" style="font-size:.82rem;padding:12px 22px">Register Now</a>
+      <a href="tel:8754111740" style="display:block;margin-top:13px;color:var(--muted);text-decoration:none;font-size:.83rem;display:flex;align-items:center;gap:5px">📞 8754111740</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Qural Talent Nexus · All rights reserved</p>
+    <p>Engineering Tomorrow Together</p>
+  </div>
+</footer>
+
+
+    <script src="./js/app.js"></script>
+</body>
+</html>
